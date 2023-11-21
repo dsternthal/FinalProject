@@ -1,21 +1,18 @@
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './App.jsx';
 import Home from './pages/Home';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
-import Login from './pages/Login';
+import Profile from './pages/Profile';
 import Signup from './pages/Signup';
-import OrderHistory from './pages/OrderHistory';
-import Success from './pages/Success';
+import Login from './pages/Login';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
-    errorElement: <NoMatch />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -27,19 +24,16 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       }, {
-        path: '/orderHistory',
-        element: <OrderHistory />
+        path: '/profiles/:profileId',
+        element: <Profile />
       }, {
-        path: '/products/:id',
-        element: <Detail />
-      }, {
-        path: '/success',
-        element: <Success />
-      },
-    ],
+        path: '/me',
+        element: <Profile />
+      }
+    ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
-);
+)
