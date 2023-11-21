@@ -19,6 +19,10 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  roleType:{
+    type: String,
+    default: "Student"
+  },
   skills: [
     {
       type: String,
