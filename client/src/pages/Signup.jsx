@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { ADD_PROFILE } from '../utils/mutations';
 
@@ -12,8 +11,19 @@ const Signup = () => {
     email: '',
     password: '',
   });
-  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
 
+  const [isStudent, setIsStudent] = useState();
+  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
+  const handleClick = (event) => {
+    const buttonText=event.target.textContent 
+    console.log(buttonText)
+    if(buttonText==="Student"){
+      setIsStudent("true")
+    }
+    else if(buttonText==="Tutor"){
+      setIsStudent("false")
+    }
+  }
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,7 +54,8 @@ const Signup = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+        <div class="ui buttons"><button onClick={handleClick} class="ui button">Student</button><div class="or"></div><button onClick={handleClick} class="ui positive button">Tutor</button></div>
+        {isStudent?(<> <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -52,7 +63,46 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <>
+              {console.log(isStudent)}
+              {isStudent==="true"?(
+                 <form onSubmit={handleFormSubmit}>
+                  <h2>Student</h2>
+                 <input
+                   className="form-input"
+                   placeholder="Your username"
+                   name="name"
+                   type="text"
+                   value={formState.name}
+                   onChange={handleChange}
+                 />
+                 <input
+                   className="form-input"
+                   placeholder="Your email"
+                   name="email"
+                   type="email"
+                   value={formState.email}
+                   onChange={handleChange}
+                 />
+                 <input
+                   className="form-input"
+                   placeholder="******"
+                   name="password"
+                   type="password"
+                   value={formState.password}
+                   onChange={handleChange}
+                 />
+                 <button
+                   className="btn btn-block btn-info"
+                   style={{ cursor: 'pointer' }}
+                   type="submit"
+                 >
+                   Submit
+                 </button>
+               </form>
+              ):(
+                <form onSubmit={handleFormSubmit}>
+                  <h2>Tutor</h2>
                 <input
                   className="form-input"
                   placeholder="Your username"
@@ -85,14 +135,19 @@ const Signup = () => {
                   Submit
                 </button>
               </form>
+              )}
+             
+            </>
             )}
+          
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
                 {error.message}
               </div>
             )}
-          </div>
+          </div></>):(<></>)}
+         
         </div>
       </div>
     </main>
