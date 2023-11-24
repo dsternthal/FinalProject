@@ -3,7 +3,8 @@
     "name": "Brian Kernighan",
     "email": "bkernighan@techfriends.dev",
     "password": "password01",
-    "skills": ["AWK", "AMPL", "Unix"]
+    "skills": ["AWK", "AMPL", "Unix"],
+    "reviews": ["great tutor"]
   },
   {
     "name": "Max Kanat-Alexander",

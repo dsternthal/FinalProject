@@ -43,10 +43,10 @@ const Profile = () => {
   return (
     <div>
       <h2 className="card-header">
-        {profileId ? `${profile.name}'s` : 'Your'} friends have endorsed these
-        skills...
+        {profileId ? `${profile.name}'s` : 'Your'} student experiences:
       </h2>
-
+      {profile.reviews}
+      
       {profile.skills?.length > 0 && (
         <SkillsList
           skills={profile.skills}
