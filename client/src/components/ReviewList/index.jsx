@@ -1,73 +1,29 @@
-import { useMutation } from '@apollo/client';
-// import { QUERY_ME } from '../../utils/queries';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+const ReviewsList = ({ reviews}) => {
 
-import { ADD_SKILL } from '../../utils/mutations';
-
-import Auth from '../../utils/auth';
-
-//   if (!reviews.length) {
-//     return <h3>No Reviews Yet</h3>;
-//   }
-
-const SkillForm = ({ profileId }) => {
-  const [skill, setSkill] = useState('');
-
-  const [addSkill, { error }] = useMutation(ADD_SKILL);
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const data = await addSkill({
-        variables: { profileId, skill },
-      });
-
-      setSkill('');
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+  if (!reviews.length) {
+    return <h3>No Reviews Yet</h3>;
+  }
 
   return (
     <div>
-      <h4>Endorse some more skills below.</h4>
-
-      {Auth.loggedIn() ? (
-        <form
-          className="flex-row justify-center justify-space-between-md align-center"
-          onSubmit={handleFormSubmit}
-        >
-          <div className="col-12 col-lg-9">
-            <input
-              placeholder="Endorse some skills..."
-              value={skill}
-              className="form-input w-100"
-              onChange={(event) => setSkill(event.target.value)}
-            />
-          </div>
-
-          <div className="col-12 col-lg-3">
-            <button className="btn btn-info btn-block py-3" type="submit">
-              Endorse Skill
-            </button>
-          </div>
-          {error && (
-            <div className="col-12 my-3 bg-danger text-white p-3">
-              {error.message}
+      <div className="flex-row justify-space-between my-4">
+        {reviews &&
+          reviews.map((review) => (
+            <div key={review} className="col-12 col-xl-6">
+              <div className="card mb-3">
+                <h4 className="card-header bg-dark text-light p-2 m-0 display-flex align-center">
+                  <span>{review}</span>
+                  
+                </h4>
+              </div>
             </div>
-          )}
-        </form>
-      ) : (
-        <p>
-          You need to be logged in to endorse skills. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
+          ))}
+      </div>
+      {error && (
+        <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
       )}
     </div>
   );
 };
 
-export default SkillForm;
+export default ReviewsList;

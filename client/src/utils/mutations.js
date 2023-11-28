@@ -22,6 +22,16 @@ export const ADD_SKILL = gql`
   }
 `;
 
+export const ADD_REVIEW = gql`
+  mutation addReview($profileId: ID!, $review: String!) {
+    addReview(profileId: $profileId, review: $review) {
+      _id
+      name
+      reviews
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

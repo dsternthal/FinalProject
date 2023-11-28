@@ -3,77 +3,61 @@
     "name": "Brian Kernighan",
     "email": "bkernighan@techfriends.dev",
     "password": "password01",
-    "skills": ["AWK", "AMPL", "Unix"],
-    "reviews": ["great tutor"]
+    "roleType": "Tutor"
   },
   {
     "name": "Max Kanat-Alexander",
     "email": "mkanatalexander@techfriends.dev",
     "password": "password02",
-    "skills": ["Java", "Perl", "Apache", "Python"]
+    "roleType": "Student"
   },
   {
     "name": "Amiko",
     "email": "amiko@techfriends.dev",
     "password": "password03",
-    "skills": ["NodeJS", "MySQL", "MongoDB", "React", "CSS-in-JS"]
+    "roleType": "Tutor"
+  
   },
   {
     "name": "Kent Beck",
     "email": "kbeck@techfriends.dev",
     "password": "password04",
-    "skills": [
-      "Test-Driven Development",
-      "Extreme Programming",
-      "Software Design Patterns",
-      "JUnit"
-    ]
+    "roleType": "Tutor"
   },
   {
     "name": "Edward V. Berard",
     "email": "evberard@techfriends.dev",
     "password": "password05",
-    "skills": ["Object-Oriented Design"]
+    "roleType": "Student"
   },
   {
     "name": "Alan Kay",
     "email": "akay@techfriends.dev",
     "password": "password06",
-    "skills": [
-      "Graphical User Interface (GUI) Design",
-      "Jazz Guitar",
-      "Education"
-    ]
+    "roleType": "Student"
   },
   {
     "name": "C.A.R. Hoare",
     "email": "choare@techfriends.dev",
     "password": "password07",
-    "skills": ["Algorithms", "Quicksort", "Hoare Logic"]
+    "roleType": "Tutor"
   },
   {
     "name": "David Thomas",
     "email": "dthomas@techfriends.dev",
     "password": "password08",
-    "skills": ["Author", "Code Kata", "Ruby", "Pragmatic Programming"]
+    "roleType": "Student"
   },
   {
     "name": "Donald Knuth",
     "email": "dknuth@techfriends.dev",
     "password": "password09",
-    "skills": ["TeX Computer Typesetting", "Algorithms", "Author"]
+    "roleType": "Student"
   },
   {
     "name": "Lernantino",
     "email": "lernantino@techfriends.dev",
     "password": "password10",
-    "skills": [
-      "JavaScript",
-      "CSS",
-      "HTML",
-      "Design Systems",
-      "Typescript",
-      "PWAs"
-    ]
+    "roleType": "Tutor"
   }
 ]

@@ -45,18 +45,35 @@ const Profile = () => {
       <h2 className="card-header">
         {profileId ? `${profile.name}'s` : 'Your'} student experiences:
       </h2>
-      {profile.reviews}
-      
-      {profile.skills?.length > 0 && (
-        <SkillsList
+      <SkillsList
           skills={profile.skills}
           isLoggedInUser={!profileId && true}
         />
+        {profile.reviews?.length > 0 && (
+        <ReviewsList
+        reviews={profile.reviews}
+        isLoggedInUser={!profileId && true}
+        />
       )}
+      {profile.roleType=== "Student" ? (
+        <>
+        
 
       <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+        {console.log(profile)}
+        <ReviewForm profileId={profile._id} />
+      </div>
+        </>
+      ):(
+        <>
+
+      <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+        {console.log(profile)}
         <SkillForm profileId={profile._id} />
       </div>
+        </>
+      )}
+
     </div>
   );
 };

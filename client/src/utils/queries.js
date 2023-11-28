@@ -29,3 +29,25 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+//ask about profile id and which to use
+export const QUERY_TUTORS = gql`
+  query tutorProfiles {
+    profiles {
+      _id
+      name
+      skills
+    }
+  }
+`;
+
+//ask about profile id and which to use
+export const QUERY_STUDENTS = gql`
+  query studentProfiles {
+    profiles {
+      _id
+      name
+      reviews
+    }
+  }
+`;
