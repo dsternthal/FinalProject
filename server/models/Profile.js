@@ -29,6 +29,12 @@ const profileSchema = new Schema({
       trim: true,
     },
   ],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 // set up pre-save middleware to create password

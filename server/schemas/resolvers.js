@@ -3,12 +3,19 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    profiles: async () => {
-      return Profile.find();
+    students: async () => {
+      return Profile.find({roleType:"Student"}).populate("reviews");
     },
 
-    profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId });
+    student: async (parent, { studentId }) => {
+      return Profile.findOne({ _id: studentId }).populate("reviews");
+    },
+    tutors: async () => {
+      return Profile.find({roleType:"Tutor"});
+    },
+
+    tutor: async (parent, { tutorId }) => {
+      return Profile.findOne({ _id: tutorId });
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
@@ -48,9 +55,29 @@ const resolvers = {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
         return Profile.findOneAndUpdate(
-          { _id: profileId },
+          { _id: context.user._id },
           {
             $addToSet: { skills: skill },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      // If user attempts to execute this mutation and isn't logged in, throw an error
+      throw AuthenticationError;
+    },
+
+    //we didn't add this to profile model bc we have 2 different profiles(tutor & student)
+    addReview: async (parent, { profileId, review }, context) => {
+      // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: { reviews: review },
+            
           },
           {
             new: true,

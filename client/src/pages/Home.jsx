@@ -17,7 +17,7 @@ const Home = () => {
           ) : (
             <ProfileList
               profiles={profiles}
-              title="Here's the current roster of friends..."
+              title="Find the tutor that fits your needs"
             />
           )}
         </div>
