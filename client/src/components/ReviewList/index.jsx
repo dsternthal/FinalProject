@@ -8,7 +8,7 @@ const ReviewsList = ({ reviews}) => {
     <div>
       <div className="flex-row justify-space-between my-4">
         {reviews &&
-          reviews.map((review) => (
+          reviews.map(({review}) => (
             <div key={review} className="col-12 col-xl-6">
               <div className="card mb-3">
                 <h4 className="card-header bg-dark text-light p-2 m-0 display-flex align-center">

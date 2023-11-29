@@ -920,11 +920,11 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #2d3e50 !important;
+  background-color: #7a9abd !important;
 }
 
 .bg-info {
-  background-color: #1bbc9b !important;
+  background-color: #6a9cf1 !important;
 }
 
 .bg-danger {
@@ -1030,7 +1030,7 @@ a:hover {
 }
 
 .btn.btn-info {
-  background-color: #1bbc9b;
+  background-color: #6a9cf1;
   color: #ffffff;
 }
 

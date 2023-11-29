@@ -24,13 +24,14 @@ const typeDefs = `
     tutor(tutorId: ID!): Profile
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: Profile
+    tutor_review(tutor_email:String):[Review]
   }
 
   type Mutation {
     addProfile(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addReview(profileId: ID!, review: String!): Profile
-    addSkill(profileId: ID!, skill: String!): Profile
+    addReview(review: String!): Profile
+    addSkill(skill: String!): Profile
     removeProfile: Profile
     removeSkill(skill: String!): Profile
   }

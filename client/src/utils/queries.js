@@ -32,22 +32,41 @@ export const QUERY_ME = gql`
 
 //ask about profile id and which to use
 export const QUERY_TUTORS = gql`
-  query tutorProfiles {
-    profiles {
-      _id
+  query Tutors {
+    tutors {
       name
+      email
       skills
+      _id
     }
-  }
-`;
+  }`;
 
 //ask about profile id and which to use
 export const QUERY_STUDENTS = gql`
-  query studentProfiles {
-    profiles {
-      _id
-      name
-      reviews
+query Students {
+  students {
+    _id
+    name
+    reviews {
+      review
+      tutor_email
     }
   }
+}
 `;
+
+export const QUERY_SINGLE_TUTOR = gql`
+query Tutor($tutorId: ID!) {
+  tutor(tutorId: $tutorId) {
+    name
+    skills
+  }
+}`;
+
+export const QUERY_TUTOR_REVIEWS = gql`
+query Tutor_review($tutorEmail: String) {
+  tutor_review(tutor_email: $tutorEmail) {
+    tutor_email
+    review
+  }
+}`

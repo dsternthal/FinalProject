@@ -1,4 +1,4 @@
-const { Profile } = require('../models');
+const { Profile, Review } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -23,6 +23,9 @@ const resolvers = {
         return Profile.findOne({ _id: context.user._id });
       }
       throw AuthenticationError;
+    },
+    tutor_review: async (parent, { tutor_email }) => {
+      return Review.find({ tutor_email: tutor_email });
     },
   },
 
@@ -51,9 +54,10 @@ const resolvers = {
     },
 
     // Add a third argument to the resolver to access data in our `context`
-    addSkill: async (parent, { profileId, skill }, context) => {
+    addSkill: async (parent, { skill }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
+        console.log(skill)
         return Profile.findOneAndUpdate(
           { _id: context.user._id },
           {
@@ -70,7 +74,7 @@ const resolvers = {
     },
 
     //we didn't add this to profile model bc we have 2 different profiles(tutor & student)
-    addReview: async (parent, { profileId, review }, context) => {
+    addReview: async (parent, { review }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
         return Profile.findOneAndUpdate(
