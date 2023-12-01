@@ -3,27 +3,37 @@ import { useQuery } from '@apollo/client';
 
 import SkillsList from '../components/SkillsList';
 import SkillForm from '../components/SkillForm';
+import ReviewForm from '../components/ReviewForm';
 
-import { QUERY_SINGLE_PROFILE, QUERY_ME } from '../utils/queries';
+
+import { QUERY_SINGLE_TUTOR, QUERY_ME, QUERY_TUTOR_REVIEWS  } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
-const Profile = () => {
-  const { profileId } = useParams();
+const Tutor = () => {
+  const { tutorId, tutor_email } = useParams();
 
   // If there is no `profileId` in the URL as a parameter, execute the `QUERY_ME` query instead for the logged in user's information
   const { loading, data } = useQuery(
-    profileId ? QUERY_SINGLE_PROFILE : QUERY_ME,
+    tutorId ? QUERY_SINGLE_TUTOR : QUERY_ME,
     {
-      variables: { profileId: profileId },
+      variables: { tutorId: tutorId },
     }
   );
 
-  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
-  const profile = data?.me || data?.profile || {};
+  const {loading:tutor_loading , data:tutor_data} = useQuery (QUERY_TUTOR_REVIEWS,{
+    variables:{
+      tutor_email
+    }
+  });
 
+  const tutorReviews = tutor_data?.tutor_review || []
+
+  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_PROFILE` query
+  const tutor = data?.me || data?.tutor || {};
+console.log(Auth.getProfile())
   // Use React Router's `<Navigate />` component to redirect to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+  if (Auth.loggedIn() && Auth.getProfile().data._id === tutorId) {
     return <Navigate to="/me" />;
   }
 
@@ -31,7 +41,7 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
-  if (!profile?.name) {
+  if (!tutor?.name) {
     return (
       <h4>
         You need to be logged in to see your profile page. Use the navigation
@@ -43,33 +53,30 @@ const Profile = () => {
   return (
     <div>
       <h2 className="card-header">
-        {profileId ? `${profile.name}'s` : 'Your'} student experiences:
+        {tutorId ? `${tutor.name}'s` : 'Your'} student experiences:
       </h2>
       <SkillsList
-          skills={profile.skills}
-          isLoggedInUser={!profileId && true}
+          skills={tutor.skills}
+          isLoggedInUser={!tutorId && true}
         />
-        {profile.reviews?.length > 0 && (
+        {tutorReviews?.length > 0 && (
         <ReviewsList
-        reviews={profile.reviews}
-        isLoggedInUser={!profileId && true}
+        reviews={tutorReviews}
         />
       )}
-      {profile.roleType=== "Student" ? (
+      {Auth.getProfile().data.roleType=== "Student" ? (
         <>
         
 
       <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        {console.log(profile)}
-        <ReviewForm profileId={profile._id} />
+        <ReviewForm profileId={Auth.getProfile().data._id} />
       </div>
         </>
       ):(
         <>
-
-      <div className="my-4 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        {console.log(profile)}
-        <SkillForm profileId={profile._id} />
+{console.log(tutorId)}
+      <div className="my-4 p-4" style={{ border: `1px ${!tutorId?"dotted":""} #1a1a1a` }}>
+        {!tutorId? <SkillForm profileId={Auth.getProfile().data._id} />:""}
       </div>
         </>
       )}
@@ -78,4 +85,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Tutor;

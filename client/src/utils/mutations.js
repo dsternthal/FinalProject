@@ -13,18 +13,18 @@ export const ADD_PROFILE = gql`
 `;
 
 export const ADD_SKILL = gql`
-  mutation addSkill($profileId: ID!, $skill: String!) {
-    addSkill(profileId: $profileId, skill: $skill) {
-      _id
-      name
-      skills
-    }
+mutation AddSkill($skill: String!) {
+  addSkill(skill: $skill) {
+    name
+    email
+    _id
+    skills
   }
-`;
+}`;
 
 export const ADD_REVIEW = gql`
-  mutation addReview($profileId: ID!, $review: String!) {
-    addReview(profileId: $profileId, review: $review) {
+  mutation addReview($review: String!) {
+    addReview(review: $review) {
       _id
       name
       reviews
