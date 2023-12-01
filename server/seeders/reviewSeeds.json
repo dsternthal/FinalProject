@@ -1,0 +1,22 @@
+[
+  {
+    "review": "Great tutor!",
+    "tutor_email": "bkernighan@techfriends.dev"
+  },
+  {
+    "review": "Amiko stinks.",
+    "tutor_email": "amiko@techfriends.dev"
+  },
+  {
+    "review": "Thank you Kent!",
+    "tutor_email": "kbeck@techfriends.dev"
+  },
+  {
+    "review": "C.A.R is the best!",
+    "tutor_email": "choare@techfriends.dev"
+  },
+  {
+    "review": "Worst tutor I've ever had",
+    "tutor_email": "lernantino@techfriends.dev"
+  }
+]
